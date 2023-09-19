@@ -1,0 +1,71 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center">
+    <h2>Eliminar usuario</h2>
+    <p>¿Seguro que quieres eliminar este usuario</p>
+</div>
+<hr />
+    @if (Model.Usuarios !=null)
+    {
+        <table class="table table-responsive table-condensed  table-hover" style="background:#3df188">
+            <thead>
+                <tr class="navbar-inverse" style="color:aliceblue">
+                    <th scope="col">Id Usuario</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">Id Rol</th>
+                    <th scope="col">Nombre del Rol</th>
+                    <th scope="col">Nombre de Usuario</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">CURP</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+        </table>
+        <tbody>
+            @foreach (ML.Usuario usuario in Model.Usuarios)
+            {
+                <tr>
+                    <th class="row">
+                    <td>@usuario.IdUsuario</td>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.ApellidoPaterno</td>
+                    <td>@usuario.ApellidoMaterno</td>
+                    <td>@usuario.Telefono</td>
+                    <td>@usuario.Celular</td>
+                    <td>@usuario.Sexo</td>
+                    <td>@usuario.Rol.IdRol</td>
+                    <td>@usuario.UserName</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Password</td>
+                    <td>@usuario.FechaNacimiento</td>
+                    <td>@usuario.Curp</td>
+                    <td>
+                        <div class="col-md-1">
+                            @Html.ActionLink("Eliminar", "Delete", "Usuario", new { @class = "btn btn-danger" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.ActionLink("Cancelar", "GetAll", "Usuario", new { @class = "btn btn-danger" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            No se encontro el id del usuario  a eliminar.Error:@ViewBag.Message
+        </div>
+
+    }
+

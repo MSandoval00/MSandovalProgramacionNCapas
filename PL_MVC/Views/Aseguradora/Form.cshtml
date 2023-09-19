@@ -1,0 +1,57 @@
+﻿@model ML.Aseguradora
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h2>Formulario para registrar Aseguradoras</h2>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Aseguradora</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Ingresa los datos de la aseguradora:</h5>
+        </div>
+        <hr />
+    </div>
+    @using (Html.BeginForm("Form", "Aseguradora", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.IdAseguradora, new { @class = "visually-hidden" })
+                    @Html.TextBoxFor(model => Model.IdAseguradora, new { @class = "form-control visually-hidden" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Nombre)
+                    @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Usuario.IdUsuario)
+
+                    @Html.DropDownListFor(Model => Model.Usuario.IdUsuario, new SelectList(Model.Usuario.Usuarios, "IdUsuario", "Email"), "Selecciona un email", new { @class = "form-control btn btn-primary dropdown-toggle" })
+                    
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+
+            <div class="col-md-1">
+                <input type="submit" data-toggle="modal" class="btn btn-success " value="Guardar" />
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Cancelar", "GetAll", "Aseguradora", new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    }
+</div>
+

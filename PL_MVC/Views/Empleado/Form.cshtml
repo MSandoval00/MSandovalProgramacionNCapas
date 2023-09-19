@@ -1,0 +1,152 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Form</h2>*@
+
+<div class="text-center">
+    <h2>Formulario para registrar empleados</h2>
+</div>
+<hr />
+<div class="container" id="Caja1">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Empleado</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Ingrese los datos del empleado</h5>
+        </div>
+        <hr />
+    </div>
+    @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model=> model.Accion)
+        @Html.HiddenFor(model => Model.Foto)
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.NumeroEmpleado)
+                    @Html.TextBoxFor(model => Model.NumeroEmpleado, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.RFC)
+                    @Html.TextBoxFor(model => Model.RFC, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Nombre)
+                    @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.ApellidoPaterno)
+                    @Html.TextBoxFor(model => Model.ApellidoPaterno, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.ApellidoMaterno)
+                    @Html.TextBoxFor(model => Model.ApellidoMaterno, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Email)
+                    @Html.TextBoxFor(model => Model.Email, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Telefono)
+                    @Html.TextBoxFor(model => Model.Telefono, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.FechaNacimiento)
+                    @Html.TextBoxFor(model => Model.FechaNacimiento, new { @class = "form-control", @type = "date", @Value = Model.FechaNacimiento.ToString("yyyy-MM-dd"), @min = "1900-01-01", @max = "9999-12-31" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.NSS)
+                    @Html.TextBoxFor(model => Model.NSS, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Empresa.IdEmpresa)
+                    @Html.DropDownListFor(model => Model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona la empresa", new { @class = "form-control btn btn-primary dropdown-toggle" })
+                </div>
+            </div>
+            <hr />
+
+            @*Imagen*@
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="col-md-3">
+                        @if (Model.Foto == "" || Model.Foto == null)//ADD
+                        {
+                            <img id="img" class="rounded-circle" src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg" width="150" height="150" />
+                            <br>
+                            <input id="I" name="Imagen" type="file" class="form-control-static" onchange="ValidarImagen(), VisualizarImagen(this)" />
+                        }
+                        else //UPDATE
+                        {
+                            <img id="I" class="rounded-circle" src="data:image/*;base64,@Model.Foto" width="150" height="150" />
+
+                            <br>
+
+                            <input id="I" name="Imagen" type="file" class="form-control-static" onchange="ValidarImagen(), VisualizarImagen(this)" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+
+
+            <div class="col-md-1">
+
+                <input type="submit" id="send" data - toggle="modal" class="btn btn-success " value="Guardar" />
+
+            </div>
+
+            <div class="col-md-1">
+                @Html.ActionLink("Cancelar", "GetAll", "Empleado", new { @class = "btn btn-danger" })
+            </div>
+
+        </div>
+    }
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    function ValidarImagen() {
+        var extensionesPermitidas = ['jpeg', 'jpg', 'png'];
+        var extensionArchivo = document.getElementById('I').value.split('.').pop().toLowerCase();
+        var isValidFile = false; //saber si es valida o no es valida
+        for (var index in extensionesPermitidas) {
+            if (extensionArchivo === extensionesPermitidas[index]) {
+                isValidFile = true;
+                break;
+            }
+        }
+        if (!isValidFile) {
+            alert('Las extensiones permitidas son : *.' + extensionesPermitidas.join(', *.'));
+            $("#I").val("")
+        }
+        return isValidFile;
+
+    }
+    function VisualizarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

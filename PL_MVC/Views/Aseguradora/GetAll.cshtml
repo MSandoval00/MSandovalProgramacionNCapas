@@ -1,0 +1,64 @@
+﻿@model ML.Aseguradora
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+<div class="text-center">
+    <h2>Registros de Aseguradora</h2>
+    <a class="btn btn-success btn-lg" href="@Url.Action("Form","Aseguradora")"><i class="fa-solid fa-hand-holding-medical"></i> Agregar</a>
+</div>
+<hr />
+
+@if (Model.Aseguradoras != null)
+{
+    <!--Tabla-->
+    <div class="table-responsive">
+        <table class="table table-dark  table-hover" id="tablaUsuario">
+            <thead>
+                <tr class="navbar-inverse" style="color: aliceblue;">
+
+                    <th scope="col" class="text-center">Id Aseguradora</th>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Fecha de Creación</th>
+                    <th scope="col" class="text-center">Fecha de Modificación</th>
+                    <th scope="col" class="text-center">Id Usuario</th>
+                    <th scope="col" class="text-center">Email</th>
+
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-light">
+                @foreach (ML.Aseguradora aseguradora in Model.Aseguradoras)
+                {
+                    <tr>
+                        <th scope="col" class="text-center">@aseguradora.IdAseguradora</th>
+                        <td scope="col" class="text-center">@aseguradora.Nombre</td>
+                        <td scope="col" class="text-center">@aseguradora.FechaCreacion</td>
+                        <td scope="col" class="text-center">@aseguradora.FechaModificacion</td>
+                        <td scope="col" class="text-center">@aseguradora.Usuario.IdUsuario</td>
+                        <td scope="col" class="text-center">@aseguradora.Usuario.Email</td>
+
+                        
+                        <td scope="col" class="text-center">
+                            <a class="btn btn-danger  " href="@Url.Action("Delete","Aseguradora",new {IdAseguradora=aseguradora.IdAseguradora} )" , onclick="return confirm('¿Estas seguro de eliminar esta aseguradora?')"><i class="fa-solid fa-trash" style="color: aliceblue;"></i></a><br />
+                            <a class="btn btn-warning " href="@Url.Action("Form", "Aseguradora", new {IdAseguradora=aseguradora.IdAseguradora})"><i class="fa-solid fa-pen-to-square" style="color:aliceblue;"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!--Fin tabla-->
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No se encontraron Aseguradoras registradas.Error:@ViewBag.Message
+    </div>
+}

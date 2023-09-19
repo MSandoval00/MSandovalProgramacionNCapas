@@ -1,0 +1,23 @@
+﻿@model ML.Dependiente
+@{
+    ViewBag.Title = "GetDependiente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+<div class="text-center">
+    <h2>Dependientes del empleado : </h2>
+    <a class="btn btn-success btn-lg" href="@Url.Action("Form","Aseguradora")"><i class="fa-solid fa-hand-holding-medical"></i> Agregar</a>
+</div>
+<hr />
+@if (Model.Dependientes != null)
+{
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No se encontraron Dependientes registrados.Error:@ViewBag.Message
+    </div>
+}

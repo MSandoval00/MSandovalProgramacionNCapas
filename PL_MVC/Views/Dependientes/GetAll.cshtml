@@ -1,0 +1,78 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link href="~/Content/Styles/cards.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+<div class="text-center">
+    @*<h2>GetAll</h2>*@
+    <h1>Empleados</h1>
+</div>
+<hr />
+@if (Model.Empleados != null)
+{
+    <div class="row">
+        @foreach (ML.Empleado empleado in Model.Empleados)
+        {
+        <div class="col-md-4">
+            <div class="card">
+                <div class="banner">
+                   
+                   
+                        @if (empleado.Foto == "" || empleado.Foto == null)
+                        {
+                            <img  class="rounded-circle " src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg" width="150" height="150" />
+                        }
+                        else
+                        {
+                            <img class="rounded-circle" src="data:image/*;base64,@empleado.Foto" width="150" height="150" />
+                        }
+
+                </div>
+            
+                <h2 class="name">@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno</h2>
+                <div class="title">@empleado.Email</div>
+                <div class="actions">
+                    <div class="follow-info">
+                        <div class="desc">
+                            RFC:<br /> @empleado.RFC<br />
+                            Teléfono: @empleado.Telefono<br />
+                            No.Seg.Social: @empleado.NSS<br />
+                            Empresa:<br /> @empleado.Empresa.Nombre<br />
+                            Teléfono Empresa: <br />@empleado.Empresa.Telefono<br />
+                        </div>
+                        <div class="desc"></div>
+                        @*<h2><a href="#"><span>12</span><small>Followers</small></a></h2>
+        <h2><a href="#"><span>1000</span><small>Following</small></a></h2>*@
+                    </div>
+                    <div class="follow-btn">
+                        <button>Follow</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No se encontraron Usuarios registrados.error:@ViewBag.Message
+    </div>
+
+}
+<script type="text/javascript">
+    let table = new DataTable('#tablaEmpleado', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+</script>

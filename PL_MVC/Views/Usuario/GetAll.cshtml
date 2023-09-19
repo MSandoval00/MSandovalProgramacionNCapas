@@ -1,0 +1,163 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+
+
+<div class="text-center">
+    <h2>GetAll</h2>
+    <h1>Tabla de usuarios registrados</h1>
+    <a class="btn btn-success btn-lg" href="@Url.Action("Form","Usuario")"><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> Agregar</a>
+    @using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido" })
+        </div>
+        <button class="btn btn-warning" type="submit">Buscar</button>
+    }
+</div>
+<hr />
+
+@if (Model.Usuarios != null)
+{
+    <!--Tabla-->
+    <div class="table-responsive">
+        <table class="table table-dark  table-hover" id="tablaUsuario">
+            <thead>
+                <tr class="navbar-inverse" style="color: aliceblue;">
+
+                    <th scope="col" class="text-center">Id Usuario</th>
+                    <th scope="col" class="text-center">Status</th>
+                    <th scope="col" class="text-center">Foto Perfil</th>
+                    <th scope="col" class="text-center">Nombre Completo</th>
+                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">Celular</th>
+                    <th scope="col" class="text-center">Sexo</th>
+                    <th scope="col" class="text-center">Nombre del Rol</th>
+                    <th scope="col" class="text-center">Nombre de Usuario</th>
+                    <th scope="col" class="text-center">Email</th>
+                    <th scope="col" class="text-center">Password</th>
+                    <th scope="col" class="text-center">Fecha de Nacimiento</th>
+                    <th scope="col" class="text-center">CURP</th>
+                    <th scope="col" class="text-center">Calle</th>
+                    <th scope="col" class="text-center">Numero Interior</th>
+                    <th scope="col" class="text-center">Numero Exterior</th>
+                    <th scope="col" class="text-center">Colonia</th>
+                    <th scope="col" class="text-center">Código Postal</th>
+                    <th scope="col" class="text-center">Municipio</th>
+                    <th scope="col" class="text-center">Estado</th>
+                    <th scope="col" class="text-center">País</th>
+
+
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-warning">
+                @foreach (ML.Usuario usuario in Model.Usuarios)
+                {
+                <tr>
+                    <th scope="row">@usuario.IdUsuario</th>
+
+                    @if (usuario.Status)
+                    {
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input " type="checkbox" id="flexSwitchCheckDefault" checked onchange="ChangeStatus(@usuario.IdUsuario, this)">
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align: center; vertical-align: middle;">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="ChangeStatus(@usuario.IdUsuario, this)">
+                            </div>
+                        </td>
+                    }
+
+
+                    <td>
+                        @if (usuario.Imagen == "" || usuario.Imagen == null)
+                        {
+                            <img class="rounded-circle" src="https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg" width="50" height="50" />
+                        }
+                        else
+                        {
+                            <img class="rounded-circle" src="data:image/*;base64,@usuario.Imagen" width="50" height="50" />
+                        }
+                    </td>
+                    <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                    <td>@usuario.Telefono</td>
+                    <td>@usuario.Celular</td>
+                    <td>@usuario.Sexo</td>
+                    @*<td>@usuario.Rol.IdRol</td>*@
+                    <td>@usuario.Rol.Nombre</td>
+                    <td>@usuario.UserName</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Password</td>
+                    <td>@usuario.FechaNacimiento</td>
+                    <td>@usuario.Curp</td>
+                    @*<td>@usuario.Imagen</td>*@
+                    <td>@usuario.Direccion.Calle</td>
+                    <td>@usuario.Direccion.NumeroInterior</td>
+                    <td>@usuario.Direccion.NumeroExterior</td>
+                    <td>@usuario.Direccion.Colonia.Nombre</td>
+                    <td>@usuario.Direccion.Colonia.CodigoPostal</td>
+                    <td>@usuario.Direccion.Colonia.Municipio.Nombre</td>
+                    <td>@usuario.Direccion.Colonia.Municipio.Estado.Nombre</td>
+                    <td>@usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre</td>
+
+                    <td>
+                        <a class="btn btn-danger  " href="@Url.Action("Delete","Usuario",new {IdUsuario=usuario.IdUsuario} )" , onclick="return confirm('¿Estas seguro de eliminar este usuario?')"><i class="fa-solid fa-trash" style="color: aliceblue;"></i></a><br />
+                        <a class="btn btn-warning " href="@Url.Action("Form", "Usuario", new {IdUsuario=usuario.IdUsuario})"><i class="fa-solid fa-pen-to-square" style="color:aliceblue;"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!--Fin tabla-->
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        No se encontraron Usuarios registrados.Error:@ViewBag.Message
+    </div>
+}
+<script type="text/javascript">
+    let table = new DataTable('#tablaUsuario', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+
+    function ChangeStatus(IdUsuario, e) {
+        var status = e.checked;
+        $.ajax({
+            url: '@Url.Action("ChangeStatus")',
+            data: { IdUsuario: IdUsuario, Status: status },
+            type: 'POST',
+            dataType: 'json',
+            success:{},
+            error: {
+                title: 'Error!',
+                content: 'Ocurrio un Error!',
+
+            }
+        })
+    }
+
+</script>

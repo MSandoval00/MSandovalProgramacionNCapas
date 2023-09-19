@@ -1,0 +1,11 @@
+﻿#resultado {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+    #resultado.ok {
+        background-color: forestgreen;
+        border-radius: 5px;
+    }

@@ -1,0 +1,3 @@
+Nombre|ApellidoPaterno|ApellidoMaterno|Telefono|Celular|Sexo|IdRol|UserName|Email|Password||FechaNacimiento|Curp|Calle|NumeroInterior|NumeroExterior|IdColonia|
+juan|perez|sandoval|343443|232323|H|1|JuanP|juan@gmail.com|1232|02/03/1999|JUANPEREZ|flores|10|103|1|
+camila|lopez|sanchez|343443|232323|M|2|Camila|jcami@gmail.com|1232|04/03/1999|CAMILA|mazapil|10|103|2|
