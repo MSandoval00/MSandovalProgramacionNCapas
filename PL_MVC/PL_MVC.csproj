@@ -321,6 +321,9 @@
     <Content Include="Views\Empleado\Delete.cshtml" />
     <Content Include="Views\Dependientes\GetAll.cshtml" />
     <Content Include="Views\Dependientes\GetDependiente.cshtml" />
+    <Content Include="Views\Dependientes\Form.cshtml" />
+    <Content Include="Views\Dependientes\Delete.cshtml" />
+    <Content Include="Views\Dependientes\Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

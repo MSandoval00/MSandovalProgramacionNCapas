@@ -7,10 +7,10 @@
 <link href="~/Content/Styles/cards.css" rel="stylesheet" />
 @Scripts.Render("~/bundles/jquery")
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-
+<br /><br />
 <div class="text-center">
     @*<h2>GetAll</h2>*@
-    <h1>Empleados</h1>
+    <h1 style="color:lemonchiffon;">Empleados</h1>
 </div>
 <hr />
 @if (Model.Empleados != null)
@@ -49,8 +49,8 @@
                         @*<h2><a href="#"><span>12</span><small>Followers</small></a></h2>
         <h2><a href="#"><span>1000</span><small>Following</small></a></h2>*@
                     </div>
-                    <div class="follow-btn">
-                        <button>Follow</button>
+                    <div class="follow-btn text-center">
+                        <a class="btn btn-warning btn-lg rounded-3 " href="@Url.Action("GetDependiente", "Dependientes", new {NumeroEmpleado=empleado.NumeroEmpleado})"><i class="bi bi-eye-fill" ></i> Dependientes</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
 else
 {
     <div class="alert alert-danger" role="alert">
-        No se encontraron Usuarios registrados.error:@ViewBag.Message
+        No se encontraron Empleados registrados.error:@ViewBag.Message
     </div>
 
 }

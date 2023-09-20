@@ -23,14 +23,14 @@ namespace BL
                         {
                             ML.Dependiente dependiente = new ML.Dependiente();
                             dependiente.IdDependiente = registro.IdDependiente;
-                            //dependiente.Empleado=new ML.Empleado();
+                            dependiente.Empleado=new ML.Empleado();
                             dependiente.Empleado.NumeroEmpleado=registro.NumeroEmpleado;
                             dependiente.Nombre = registro.Nombre;
                             dependiente.ApellidoPaterno = registro.ApellidoPaterno;
                             dependiente.ApellidoMaterno = registro.ApellidoMaterno;
                             dependiente.FechaNacimiento = DateTime.Parse(registro.FechaNacimiento.ToString());
                             dependiente.EstadoCivil=registro.EstadoCivil;
-                            dependiente.Genero = Char.Parse(registro.Genero.ToString());
+                            dependiente.Genero = registro.Genero.FirstOrDefault();
                             dependiente.Telefono=registro.Telefono;
                             dependiente.RFC = registro.RFC;
                           
@@ -52,6 +52,107 @@ namespace BL
                 //resultado.Ex = ex;
             }
             return resultado;
+        }
+        public static ML.Result Add(ML.Dependiente dependiente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.MSandovalProgramacionNcapasEntities context = new DL_EF.MSandovalProgramacionNcapasEntities())
+                {
+                    var query = context.DependienteAdd(dependiente.Empleado.NumeroEmpleado,
+                        dependiente.Nombre, 
+                        dependiente.ApellidoPaterno,
+                        dependiente.ApellidoMaterno,
+                        dependiente.FechaNacimiento,
+                        dependiente.EstadoCivil,
+                        dependiente.Genero.ToString(),
+                        dependiente.Telefono,
+                        dependiente.RFC);
+                    if (query >= 1)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se inserto el registro";
+                    }
+                    result.Correct = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+        public static ML.Result Delete(int IdDependiente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.MSandovalProgramacionNcapasEntities context = new DL_EF.MSandovalProgramacionNcapasEntities())
+                {
+                    var query = context.DependienteDelete(IdDependiente);
+                    if (query > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Dependiente no eliminado";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+        public static ML.Result Update(ML.Dependiente dependiente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.MSandovalProgramacionNcapasEntities context = new DL_EF.MSandovalProgramacionNcapasEntities())
+                {
+                    var query = context.DependienteUpdate(dependiente.IdDependiente,
+                        dependiente.Empleado.NumeroEmpleado,
+                        dependiente.Nombre, 
+                        dependiente.ApellidoPaterno,
+                        dependiente.ApellidoMaterno,
+                        dependiente.FechaNacimiento,
+                        dependiente.EstadoCivil,
+                        dependiente.Genero.ToString(),
+                        dependiente.Telefono,
+                        dependiente.RFC);
+                    if (query > 0)
+                    {
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se modificaron los datos del dependiente";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
         }
     }
 }

@@ -8,12 +8,57 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 <div class="text-center">
     <h2>Dependientes del empleado : </h2>
-    <a class="btn btn-success btn-lg" href="@Url.Action("Form","Aseguradora")"><i class="fa-solid fa-hand-holding-medical"></i> Agregar</a>
+    <a class="btn btn-success btn-lg" href="@Url.Action("Form","Dependientes", new {NumeroEmpleado=Model.Empleado.NumeroEmpleado})"><i class="fa-solid fa-hand-holding-medical"></i> Agregar</a>
 </div>
 <hr />
 @if (Model.Dependientes != null)
 {
+    <!--Tabla-->
+    <div class="table-responsive">
+        <table class="table table-dark  table-hover" id="tablaUsuario">
+            <thead>
+                <tr class="navbar-inverse" style="color: aliceblue;">
+                    <th scope="col" class="text-center">Eliminar</th>
+                    <th scope="col" class="text-center">Id Dependiente</th>
+                    <th scope="col" class="text-center">Numero Empleado</th>
+                    <th scope="col" class="text-center">Nombre Completo</th>
+                    <th scope="col" class="text-center">Fecha de Nacimiento</th>
+                    <th scope="col" class="text-center">Estado Civil</th>
+                    <th scope="col" class="text-center">Genero</th>
+                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col" class="text-center">RFC</th>
 
+                    <th scope="col" class="text-center">Editar</th>
+
+                </tr>
+            </thead>
+
+            <tbody class="table-light">
+                @foreach (ML.Dependiente dependiente in Model.Dependientes)
+                {
+                <tr>
+                    <td scope="col" class="text-center">
+                        <a class="btn btn-danger  " href="@Url.Action("Delete","Dependientes",new {IdDependiente=dependiente.IdDependiente} )" , onclick="return confirm('¿Estas seguro de eliminar este dependiente?')"><i class="fa-solid fa-trash" style="color: aliceblue;"></i></a><br />            
+                    </td>
+                    <th scope="col" class="text-center">@dependiente.IdDependiente</th>
+                    <th scope="col" class="text-center">@dependiente.Empleado.NumeroEmpleado</th>
+                    <td scope="col" class="text-center">@dependiente.Nombre @dependiente.ApellidoPaterno @dependiente.ApellidoMaterno</td>
+                    <td scope="col" class="text-center">@dependiente.FechaNacimiento</td>
+                    <td scope="col" class="text-center">@dependiente.EstadoCivil</td>
+                    <td scope="col" class="text-center">@dependiente.Genero</td>
+                    <td scope="col" class="text-center">@dependiente.Telefono</td>
+                    <td scope="col" class="text-center">@dependiente.RFC</td>
+
+
+                    <td scope="col" class="text-center">
+                        <a class="btn btn-warning " href="@Url.Action("Form", "Dependientes", new {IdDependiente=dependiente.IdDependiente, NumeroEmpleado=dependiente.Empleado.NumeroEmpleado})"><i class="fa-solid fa-pen-to-square" style="color:aliceblue;"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!--Fin tabla-->
 }
 else
 {
@@ -21,3 +66,13 @@ else
         No se encontraron Dependientes registrados.Error:@ViewBag.Message
     </div>
 }
+<script type="text/javascript">
+    let table = new DataTable('#tablaUsuario', {
+        reponsive: true,
+        "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "Todos"]],
+        searching: false,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+    });
+</script>

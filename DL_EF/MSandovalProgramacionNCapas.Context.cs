@@ -462,5 +462,100 @@ namespace DL_EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetByNumeroEmpleado_Result>("DependienteGetByNumeroEmpleado", numeroEmpleadoParameter);
         }
+    
+        public virtual int DependienteAdd(string numeroEmpleado, string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<System.DateTime> fechaNacimiento, string estadoCivil, string genero, string telefono, string rFC)
+        {
+            var numeroEmpleadoParameter = numeroEmpleado != null ?
+                new ObjectParameter("NumeroEmpleado", numeroEmpleado) :
+                new ObjectParameter("NumeroEmpleado", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var estadoCivilParameter = estadoCivil != null ?
+                new ObjectParameter("EstadoCivil", estadoCivil) :
+                new ObjectParameter("EstadoCivil", typeof(string));
+    
+            var generoParameter = genero != null ?
+                new ObjectParameter("Genero", genero) :
+                new ObjectParameter("Genero", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var rFCParameter = rFC != null ?
+                new ObjectParameter("RFC", rFC) :
+                new ObjectParameter("RFC", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteAdd", numeroEmpleadoParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, estadoCivilParameter, generoParameter, telefonoParameter, rFCParameter);
+        }
+    
+        public virtual int DependienteDelete(Nullable<int> idDependiente)
+        {
+            var idDependienteParameter = idDependiente.HasValue ?
+                new ObjectParameter("IdDependiente", idDependiente) :
+                new ObjectParameter("IdDependiente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteDelete", idDependienteParameter);
+        }
+    
+        public virtual int DependienteUpdate(Nullable<int> idDependiente, string numeroEmpleado, string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<System.DateTime> fechaNacimiento, string estadoCivil, string genero, string telefono, string rFC)
+        {
+            var idDependienteParameter = idDependiente.HasValue ?
+                new ObjectParameter("IdDependiente", idDependiente) :
+                new ObjectParameter("IdDependiente", typeof(int));
+    
+            var numeroEmpleadoParameter = numeroEmpleado != null ?
+                new ObjectParameter("NumeroEmpleado", numeroEmpleado) :
+                new ObjectParameter("NumeroEmpleado", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var estadoCivilParameter = estadoCivil != null ?
+                new ObjectParameter("EstadoCivil", estadoCivil) :
+                new ObjectParameter("EstadoCivil", typeof(string));
+    
+            var generoParameter = genero != null ?
+                new ObjectParameter("Genero", genero) :
+                new ObjectParameter("Genero", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var rFCParameter = rFC != null ?
+                new ObjectParameter("RFC", rFC) :
+                new ObjectParameter("RFC", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteUpdate", idDependienteParameter, numeroEmpleadoParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, estadoCivilParameter, generoParameter, telefonoParameter, rFCParameter);
+        }
     }
 }
