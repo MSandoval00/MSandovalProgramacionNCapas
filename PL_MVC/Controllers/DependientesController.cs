@@ -39,20 +39,27 @@ namespace PL_MVC.Controllers
             return View(dependiente);
         }
         [HttpGet]
-        public ActionResult Form(string NumeroEmpleado)
+        public ActionResult Form(string NumeroEmpleado, int? IdDependiente)
         {
             ML.Dependiente dependiente = new ML.Dependiente();
+            //int IdDependiente = dependiente.IdDependiente;
+
             dependiente.Empleado=new ML.Empleado();
             dependiente.Empleado.NumeroEmpleado=NumeroEmpleado;
 
-            if (NumeroEmpleado!=null)//Update
+            //ML.Result resultEmpleado = BL.Empleado.GetAll();
+
+            if (IdDependiente!=null)//Update
             {
-                ML.Result result = BL.Dependiente.GetByNumeroEmpleado(NumeroEmpleado.ToString());
+                ML.Result result = BL.Dependiente.GetById(IdDependiente.Value);
+                //ML.Result result1 = BL.Dependiente.GetByNumeroEmpleado(NumeroEmpleado.ToString());
                 if (result.Correct)
                 {
-
+                    dependiente = (ML.Dependiente)result.Object;
+                    dependiente.Dependientes=result.Objects;
                     dependiente.Empleado = new ML.Empleado();
                     dependiente.Empleado.NumeroEmpleado = NumeroEmpleado;
+                    dependiente.Accion = "Update";
 
                 }
 
@@ -60,21 +67,25 @@ namespace PL_MVC.Controllers
             else//Add
             {
                 dependiente.Empleado.NumeroEmpleado = NumeroEmpleado;
+                dependiente.Accion = "Add";
             }
             return View(dependiente);
         }
         [HttpPost]
         public ActionResult Form(ML.Dependiente dependiente)
         {
-            if (dependiente.IdDependiente == 0)//Add
+            if (dependiente.Accion=="Add")
+           /* if (dependiente.IdDependiente == 0)*///Add
             {
                 ML.Result result = BL.Dependiente.Add(dependiente);
                 if (result.Correct)
                 {
+                    ViewBag.NumeroEmpleado = dependiente.Empleado.NumeroEmpleado;
                     ViewBag.Mensaje = "Se ha ingresado correctamente el dependiente";
                 }
                 else
                 {
+                    ViewBag.NumeroEmpleado = dependiente.Empleado.NumeroEmpleado;
                     ViewBag.Mensaje = "No se ingresado correctamente el dependiente. Error: " + result.ErrorMessage;
                 }
             }
@@ -83,10 +94,12 @@ namespace PL_MVC.Controllers
                 ML.Result result = BL.Dependiente.Update(dependiente);
                 if (result.Correct)
                 {
+                    ViewBag.NumeroEmpleado = dependiente.Empleado.NumeroEmpleado;
                     ViewBag.Mensaje = "Se ha actualizado los datos del dependiente correctamente";
                 }
                 else
                 {
+                    ViewBag.NumeroEmpleado = dependiente.Empleado.NumeroEmpleado;
                     ViewBag.Mensaje = "No se ha podido actualizar correctamente los datos del dependiente" + result.ErrorMessage;
                 }
             }
@@ -97,6 +110,7 @@ namespace PL_MVC.Controllers
             ML.Result result = BL.Dependiente.Delete(IdDependiente);
             if (result.Correct)
             {
+                ViewBag.IdDependiente = IdDependiente;
                 ViewBag.Mensaje = "Dependiente borrado correctamente";
             }
             else
@@ -105,5 +119,6 @@ namespace PL_MVC.Controllers
             }
             return PartialView("Modal");
         }
+       
     }
 }

@@ -557,5 +557,14 @@ namespace DL_EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteUpdate", idDependienteParameter, numeroEmpleadoParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, estadoCivilParameter, generoParameter, telefonoParameter, rFCParameter);
         }
+    
+        public virtual ObjectResult<DependienteGetByIdDependiente_Result> DependienteGetByIdDependiente(Nullable<int> idDependiente)
+        {
+            var idDependienteParameter = idDependiente.HasValue ?
+                new ObjectParameter("IdDependiente", idDependiente) :
+                new ObjectParameter("IdDependiente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetByIdDependiente_Result>("DependienteGetByIdDependiente", idDependienteParameter);
+        }
     }
 }

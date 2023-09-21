@@ -69,6 +69,9 @@
     <Compile Include="Dependiente.cs">
       <DependentUpon>MSandovalProgramacionNCapas.tt</DependentUpon>
     </Compile>
+    <Compile Include="DependienteGetByIdDependiente_Result.cs">
+      <DependentUpon>MSandovalProgramacionNCapas.tt</DependentUpon>
+    </Compile>
     <Compile Include="DependienteGetByNumeroEmpleado_Result.cs">
       <DependentUpon>MSandovalProgramacionNCapas.tt</DependentUpon>
     </Compile>

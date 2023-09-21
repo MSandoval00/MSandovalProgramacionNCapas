@@ -9,6 +9,7 @@
 <div class="text-center">
     <h2>Dependientes del empleado : </h2>
     <a class="btn btn-success btn-lg" href="@Url.Action("Form","Dependientes", new {NumeroEmpleado=Model.Empleado.NumeroEmpleado})"><i class="fa-solid fa-hand-holding-medical"></i> Agregar</a>
+     @Html.ActionLink("Regresar", "GetAll", "Dependientes", new { @class = "btn btn-danger btn-lg" })
 </div>
 <hr />
 @if (Model.Dependientes != null)
@@ -51,7 +52,7 @@
 
 
                     <td scope="col" class="text-center">
-                        <a class="btn btn-warning " href="@Url.Action("Form", "Dependientes", new {IdDependiente=dependiente.IdDependiente, NumeroEmpleado=dependiente.Empleado.NumeroEmpleado})"><i class="fa-solid fa-pen-to-square" style="color:aliceblue;"></i></a>
+                        <a class="btn btn-warning " href="@Url.Action("Form", "Dependientes", new {IdDependiente=dependiente.IdDependiente, NumeroEmpleado=Model.Empleado.NumeroEmpleado})"><i class="fa-solid fa-pen-to-square" style="color:aliceblue;"></i></a>
                     </td>
                 </tr>
                 }

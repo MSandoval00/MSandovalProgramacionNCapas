@@ -18,6 +18,7 @@ namespace ML
         public char Genero { get; set; }
         public string Telefono { get; set; }
         public string RFC { get; set; }
+        public string Accion { get; set; }
 
         public List<object> Dependientes { get; set; }
 

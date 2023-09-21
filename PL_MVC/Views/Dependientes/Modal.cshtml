@@ -18,7 +18,8 @@
             </div>
             <div class="modal-footer">
                 @*@Html.ActionLink("Regresar", "GetAll", "Materia", htmlAttributes: new { @class = "btn btn-danger" })*@
-                @Html.ActionLink("Continuar", "GetDependiente", "Dependientes", htmlAttributes: new { @class = "btn btn-danger" })
+                <a class="btn btn-danger btn-lg" href="@Url.Action("GetDependiente","Dependientes", new {@class = "btn btn-danger", NumeroEmpleado = ViewBag.NumeroEmpleado})">Continuar</a>
+                @*@Html.ActionLink("Continuar", "GetDependiente", "Dependientes", htmlAttributes: new { @class = "btn btn-danger", NumeroEmpleado = ViewBag.NumeroEmpleado })*@
 
 
             </div>

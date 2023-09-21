@@ -8,6 +8,46 @@ namespace BL
 {
     public class Dependiente
     {
+        public static ML.Result GetById(int IdDependiente)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL_EF.MSandovalProgramacionNcapasEntities context= new DL_EF.MSandovalProgramacionNcapasEntities())
+                {
+                    var query = context.DependienteGetByIdDependiente(IdDependiente).FirstOrDefault();
+                    result.Objects = new List<object>();
+                    if (query!=null)
+                    {
+                        ML.Dependiente dependiente = new ML.Dependiente();
+                        dependiente.IdDependiente = query.IdDependiente;
+                        dependiente.Empleado = new ML.Empleado();
+                        dependiente.Empleado.NumeroEmpleado = query.NumeroEmpleado;
+                        dependiente.Nombre=query.Nombre;
+                        dependiente.ApellidoPaterno=query.ApellidoPaterno;
+                        dependiente.ApellidoMaterno=query.ApellidoMaterno;
+                        dependiente.FechaNacimiento = DateTime.Parse(query.FechaNacimiento.ToString());
+                        dependiente.EstadoCivil=query.EstadoCivil;
+                        dependiente.Genero = query.Genero.FirstOrDefault();
+                        dependiente.Telefono=query.Telefono;
+                        dependiente.RFC=query.RFC;
+
+                        result.Object=dependiente;
+                        result.Correct = true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex=ex;   
+            }
+            return result;
+
+        }
         public static ML.Result GetByNumeroEmpleado(string NumeroEmpleado)
         {
             ML.Result resultado = new ML.Result();

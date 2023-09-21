@@ -266,6 +266,9 @@
         <Function Name="DependienteDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdDependiente" Type="int" Mode="In" />
         </Function>
+        <Function Name="DependienteGetByIdDependiente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDependiente" Type="int" Mode="In" />
+        </Function>
         <Function Name="DependienteGetByNumeroEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NumeroEmpleado" Type="varchar" Mode="In" />
         </Function>
@@ -629,6 +632,9 @@
             <Parameter Name="Genero" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="RFC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DependienteGetByIdDependiente" ReturnType="Collection(MSandovalProgramacionNcapasModel.DependienteGetByIdDependiente_Result)">
+            <Parameter Name="IdDependiente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Rol">
@@ -1029,6 +1035,18 @@
           <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="RFC" Nullable="false" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="DependienteGetByIdDependiente_Result">
+          <Property Type="Int32" Name="IdDependiente" Nullable="false" />
+          <Property Type="String" Name="NumeroEmpleado" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="EstadoCivil" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="20" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1387,6 +1405,22 @@
           <FunctionImportMapping FunctionImportName="DependienteAdd" FunctionName="MSandovalProgramacionNcapasModel.Store.DependienteAdd" />
           <FunctionImportMapping FunctionImportName="DependienteDelete" FunctionName="MSandovalProgramacionNcapasModel.Store.DependienteDelete" />
           <FunctionImportMapping FunctionImportName="DependienteUpdate" FunctionName="MSandovalProgramacionNcapasModel.Store.DependienteUpdate" />
+          <FunctionImportMapping FunctionImportName="DependienteGetByIdDependiente" FunctionName="MSandovalProgramacionNcapasModel.Store.DependienteGetByIdDependiente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MSandovalProgramacionNcapasModel.DependienteGetByIdDependiente_Result">
+                <ScalarProperty Name="IdDependiente" ColumnName="IdDependiente" />
+                <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

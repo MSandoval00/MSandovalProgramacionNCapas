@@ -26,6 +26,7 @@
         {
             @Html.HiddenFor(model => model.IdDependiente)
             @Html.HiddenFor(model => model.Empleado.NumeroEmpleado)
+            @Html.HiddenFor(model => model.Accion)
             <div class="row">
                 <div class="col-md-3">
                     @Html.LabelFor(model => Model.Nombre)
@@ -102,10 +103,13 @@
             <div class="row">
 
                 <div class="col-md-1">
+
+                    @*<a class="btn btn-success"  href="@Url.Action("GetDependiente", "Dependientes", new {NumeroEmpleado=Model.Empleado.NumeroEmpleado})"> Guardar</a>*@
                     <input type="submit" data-toggle="modal" class="btn btn-success " value="Guardar" />
                 </div>
                 <div class="col-md-1">
-                    @Html.ActionLink("Cancelar", "GetDependiente", "Dependientes", new { @class = "btn btn-danger" })
+                    <a class="btn btn-danger" href="@Url.Action("GetDependiente","Dependientes", new {@class = "btn btn-danger", NumeroEmpleado = Model.Empleado.NumeroEmpleado})">Cancelar</a>
+                    @*@Html.ActionLink("Cancelar", "GetDependiente", "Dependientes", new { @class = "btn btn-danger" })*@
                 </div>
             </div>
         }
