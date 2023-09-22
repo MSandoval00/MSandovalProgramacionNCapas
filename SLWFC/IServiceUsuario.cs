@@ -13,6 +13,15 @@ namespace SLWFC
     {
         [OperationContract]
         SLWFC.Result Add(ML.Usuario usuario);
-       
+        [OperationContract]
+        SLWFC.Result Delete(int IdUsuario);
+        [OperationContract]
+        SLWFC.Result Update(ML.Usuario usuario);
+       [OperationContract]
+        [ServiceKnownType(typeof(ML.Usuario))]
+        SLWFC.Result GetAll(ML.Usuario usuario);
+        [OperationContract]
+        [ServiceKnownType(typeof(ML.Usuario))]
+        SLWFC.Result GetById(int IdUsuario);
     }
 }

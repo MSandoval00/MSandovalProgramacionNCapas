@@ -45,5 +45,28 @@ namespace SLWFC
             return resultwcf;
         }
 
+        public SLWFC.Result GetAll()
+        {
+            ML.Result result = BL.Empleado.GetAll();
+            SLWFC.Result resultwcf=new SLWFC.Result();
+            resultwcf.Correct=result.Correct;
+            resultwcf.ErrorMessage=result.ErrorMessage;
+            resultwcf.Object=result.Object;
+            resultwcf.Objects=result.Objects;
+            resultwcf.Ex=result.Ex;
+            return resultwcf;
+
+        }
+        public SLWFC.Result GetById(string NumeroEmpleado)
+        {
+            ML.Result result=BL.Empleado.GetById(NumeroEmpleado);
+            SLWFC.Result resultwcf=new SLWFC.Result();
+            resultwcf.Correct= result.Correct;
+            resultwcf.ErrorMessage= result.ErrorMessage;
+            resultwcf.Object= result.Object;
+            resultwcf.Objects= result.Objects;
+            resultwcf.Ex= result.Ex;
+            return resultwcf ;
+        }
     }
 }

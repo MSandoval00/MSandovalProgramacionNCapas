@@ -16,7 +16,11 @@ namespace SLWFC
         [OperationContract]
         SLWFC.Result Update(ML.Empleado empleado);
         [OperationContract]
-        SLWFC.Result Delete(string IdEmpleado);
+        SLWFC.Result Delete(string NumeroEmpleado);
+        [OperationContract]
+        SLWFC.Result GetAll();
+        [OperationContract]
+        SLWFC.Result GetById(string NumeroEmpleado);
 
     }
 }

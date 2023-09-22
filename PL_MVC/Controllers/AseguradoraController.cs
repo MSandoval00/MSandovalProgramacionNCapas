@@ -8,16 +8,39 @@ namespace PL_MVC.Controllers
 {
     public class AseguradoraController : Controller
     {
+        //WebConfig
+        //bindingConfiguration="BasicHttpBinding_IServiceAseguradora"
+
         // GET: Aseguradora
         [HttpGet]
-        public ActionResult GetAll() 
+        //Stored Procedure
+        //public ActionResult GetAll() 
+        //{
+        //    ML.Result result=BL.Aseguradora.GetAll();
+        //    ML.Aseguradora aseguradora=new ML.Aseguradora();
+        //    aseguradora.Aseguradoras = new List<object>();
+        //    if (result.Correct)
+        //    {
+        //        aseguradora.Aseguradoras = result.Objects;
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = result.ErrorMessage;
+        //    }
+        //    return View(aseguradora);
+        //}
+        //WCF
+        public ActionResult GetAll()
         {
-            ML.Result result=BL.Aseguradora.GetAll();
-            ML.Aseguradora aseguradora=new ML.Aseguradora();
-            aseguradora.Aseguradoras = new List<object>();
+            //ML.Result result = BL.Aseguradora.GetAll();
+            ML.Aseguradora aseguradora = new ML.Aseguradora();
+            //aseguradora.Aseguradoras = new List<object>();
+            //WCF
+            ServiceReferenceAseguradora.ServiceAseguradoraClient aseguradoraWCF=new  ServiceReferenceAseguradora.ServiceAseguradoraClient();
+            var result = aseguradoraWCF.GetAll();
             if (result.Correct)
             {
-                aseguradora.Aseguradoras = result.Objects;
+                aseguradora.Aseguradoras = result.Objects.ToList();
             }
             else
             {
@@ -26,27 +49,37 @@ namespace PL_MVC.Controllers
             return View(aseguradora);
         }
 
+
         [HttpGet]
         public ActionResult Form(int? IdAseguradora)
         {
             ML.Aseguradora aseguradora = new ML.Aseguradora();
             aseguradora.Usuario=new ML.Usuario();
+            //WCF
+            ServiceReferenceAseguradora.ServiceAseguradoraClient aseguradoraWCF = new ServiceReferenceAseguradora.ServiceAseguradoraClient();
+            var resultadoAseguradora=aseguradoraWCF.GetAll();
 
-            ML.Result resultadoUsuario = BL.Usuario.GetAllEF(aseguradora.Usuario); //Verificar 
+
+            //ML.Result resultadoAseguradora = BL.Usuario.GetAllEF(aseguradora.Usuario); //Verificar 
 
             if (IdAseguradora != null) //Update
             {
-                ML.Result result = BL.Aseguradora.GetById(IdAseguradora.Value);
+                //WCF
+                var result = aseguradoraWCF.GetById(IdAseguradora.Value);
+                //Sin WCF
+                //ML.Result result = BL.Aseguradora.GetById(IdAseguradora.Value);
                 if (result.Correct)
                 {
                     aseguradora = (ML.Aseguradora)result.Object;
-                    aseguradora.Usuario.Usuarios = resultadoUsuario.Objects;
+                    //aseguradora.Usuario.Usuarios = resultadoAseguradora.Objects;
+                    aseguradora.Usuario.Usuarios = resultadoAseguradora.Objects.ToList();
                 }//Unboxing
             }
             else //Add
             {
-               // aseguradora.Aseguradoras = resultadoUsuario.Objects;
-                aseguradora.Usuario.Usuarios = resultadoUsuario.Objects;
+               //// aseguradora.Aseguradoras = resultadoUsuario.Objects;
+               // aseguradora.Usuario.Usuarios = resultadoAseguradora.Objects;
+                aseguradora.Usuario.Usuarios = resultadoAseguradora.Objects.ToList();
             }
             return View(aseguradora);
         }
@@ -55,7 +88,11 @@ namespace PL_MVC.Controllers
         {
             if (aseguradora.IdAseguradora==0)//Add
             {
-                ML.Result result = BL.Aseguradora.Add(aseguradora);
+                //WCF
+                ServiceReferenceAseguradora.ServiceAseguradoraClient aseguradoraWCF = new ServiceReferenceAseguradora.ServiceAseguradoraClient();
+                var result = aseguradoraWCF.Add(aseguradora);
+
+                //ML.Result result = BL.Aseguradora.Add(aseguradora);
                 if (result.Correct)
                 {
                     ViewBag.Mensaje = "Se ha ingresado correctamente la aseguradora";
@@ -67,7 +104,9 @@ namespace PL_MVC.Controllers
             }
             else //Update
             {
-                ML.Result result= BL.Aseguradora.Update(aseguradora);
+                ServiceReferenceAseguradora.ServiceAseguradoraClient aseguradoraWCF = new ServiceReferenceAseguradora.ServiceAseguradoraClient();
+                var result = aseguradoraWCF.Update(aseguradora);
+                //ML.Result result= BL.Aseguradora.Update(aseguradora);
                 if (result.Correct)
                 {
                     ViewBag.Mensaje = "Se ha actualizado los datos de la aseguradora correctamente";
@@ -81,7 +120,10 @@ namespace PL_MVC.Controllers
         }
         public ActionResult Delete(int IdAseguradora)
         {
-            ML.Result result = BL.Aseguradora.Delete(IdAseguradora);
+            //WCF
+            ServiceReferenceAseguradora.ServiceAseguradoraClient aseguradoraWCF = new ServiceReferenceAseguradora.ServiceAseguradoraClient();
+            var result =aseguradoraWCF.Delete(IdAseguradora);
+            //ML.Result result = BL.Aseguradora.Delete(IdAseguradora);
             if (result.Correct)
             {
                 ViewBag.Mensaje = "Aseguradora borrada correctamente";
