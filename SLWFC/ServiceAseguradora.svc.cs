@@ -89,6 +89,18 @@ namespace SLWFC
                 Object = result.Object,
                 Objects = result.Objects
             };
+        } 
+        public SLWFC.Result UsuarioGetAll(ML.Usuario usuario)
+        {
+            ML.Result result = BL.Usuario.GetAllEF(usuario);
+            return new SLWFC.Result
+            {
+                Correct = result.Correct,
+                ErrorMessage = result.ErrorMessage,
+                Ex = result.Ex,
+                Object = result.Object,
+                Objects = result.Objects
+            };
         }
         public SLWFC.Result GetById(int IdAseguradora)
         {

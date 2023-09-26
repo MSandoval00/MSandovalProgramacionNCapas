@@ -34,6 +34,12 @@
   <wsdl:message name="IServiceAseguradora_GetAll_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceAseguradora_UsuarioGetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioGetAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAseguradora_UsuarioGetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UsuarioGetAllResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceAseguradora_GetById_InputMessage">
     <wsdl:part name="parameters" element="tns:GetById" />
   </wsdl:message>
@@ -56,6 +62,10 @@
     <wsdl:operation name="GetAll">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAseguradora/GetAll" message="tns:IServiceAseguradora_GetAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceAseguradora/GetAllResponse" message="tns:IServiceAseguradora_GetAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioGetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceAseguradora/UsuarioGetAll" message="tns:IServiceAseguradora_UsuarioGetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceAseguradora/UsuarioGetAllResponse" message="tns:IServiceAseguradora_UsuarioGetAll_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetById">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAseguradora/GetById" message="tns:IServiceAseguradora_GetById_InputMessage" />
@@ -93,6 +103,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAll">
       <soap:operation soapAction="http://tempuri.org/IServiceAseguradora/GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UsuarioGetAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceAseguradora/UsuarioGetAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

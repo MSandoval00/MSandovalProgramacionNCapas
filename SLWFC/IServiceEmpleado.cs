@@ -18,8 +18,13 @@ namespace SLWFC
         [OperationContract]
         SLWFC.Result Delete(string NumeroEmpleado);
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Empleado))]
         SLWFC.Result GetAll();
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Empresa))]
+        SLWFC.Result EmpresaGetAll();
+        [OperationContract]
+        [ServiceKnownType(typeof(ML.Empleado))]
         SLWFC.Result GetById(string NumeroEmpleado);
 
     }

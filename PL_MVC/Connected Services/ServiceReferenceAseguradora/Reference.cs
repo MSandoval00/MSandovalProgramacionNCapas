@@ -180,6 +180,22 @@ namespace PL_MVC.ServiceReferenceAseguradora {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAseguradora/GetAll", ReplyAction="http://tempuri.org/IServiceAseguradora/GetAllResponse")]
         System.Threading.Tasks.Task<PL_MVC.ServiceReferenceAseguradora.Result> GetAllAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAseguradora/UsuarioGetAll", ReplyAction="http://tempuri.org/IServiceAseguradora/UsuarioGetAllResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(PL_MVC.ServiceReferenceAseguradora.Result))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Aseguradora))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Municipio))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Estado))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Pais))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Rol))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Exception))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Direccion))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ML.Colonia))]
+        PL_MVC.ServiceReferenceAseguradora.Result UsuarioGetAll(ML.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAseguradora/UsuarioGetAll", ReplyAction="http://tempuri.org/IServiceAseguradora/UsuarioGetAllResponse")]
+        System.Threading.Tasks.Task<PL_MVC.ServiceReferenceAseguradora.Result> UsuarioGetAllAsync(ML.Usuario usuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAseguradora/GetById", ReplyAction="http://tempuri.org/IServiceAseguradora/GetByIdResponse")]
         PL_MVC.ServiceReferenceAseguradora.Result GetById(int IdAseguradora);
         
@@ -244,6 +260,14 @@ namespace PL_MVC.ServiceReferenceAseguradora {
         
         public System.Threading.Tasks.Task<PL_MVC.ServiceReferenceAseguradora.Result> GetAllAsync() {
             return base.Channel.GetAllAsync();
+        }
+        
+        public PL_MVC.ServiceReferenceAseguradora.Result UsuarioGetAll(ML.Usuario usuario) {
+            return base.Channel.UsuarioGetAll(usuario);
+        }
+        
+        public System.Threading.Tasks.Task<PL_MVC.ServiceReferenceAseguradora.Result> UsuarioGetAllAsync(ML.Usuario usuario) {
+            return base.Channel.UsuarioGetAllAsync(usuario);
         }
         
         public PL_MVC.ServiceReferenceAseguradora.Result GetById(int IdAseguradora) {

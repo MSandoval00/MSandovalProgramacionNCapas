@@ -17,12 +17,14 @@ namespace PL_MVC.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            ML.Result result = BL.Empleado.GetAll();
+            //ML.Result result = BL.Empleado.GetAll();
             ML.Empleado empleado = new ML.Empleado();
-            empleado.Empleados = new List<object>();
+            ServiceReferenceEmpleado.ServiceEmpleadoClient empleadoWCF= new ServiceReferenceEmpleado.ServiceEmpleadoClient();
+            var result =empleadoWCF.GetAll();
+            //empleado.Empleados = new List<object>();
             if (result.Correct)
             {
-                empleado.Empleados = result.Objects;
+                empleado.Empleados = result.Objects.ToList();
             }
             else
             {
@@ -37,22 +39,27 @@ namespace PL_MVC.Controllers
         {
             ML.Empleado empleado = new ML.Empleado();
             empleado.Empresa = new ML.Empresa();
-
-            ML.Result resultadoEmpresa = BL.Empresa.GetAll();
+            //WCF
+            ServiceReferenceEmpleado.ServiceEmpleadoClient empleadoWCF = new ServiceReferenceEmpleado.ServiceEmpleadoClient();
+            var resultadoEmpresa = empleadoWCF.EmpresaGetAll();
+            //ML.Result resultadoEmpresa = BL.Empresa.GetAll();
 
             if (NumeroEmpleado != null) //Update
             {
-                ML.Result result = BL.Empleado.GetById(NumeroEmpleado.ToString()); //Verificar si va con value
+                //WCF
+                var result = empleadoWCF.GetById(NumeroEmpleado.ToString());
+                
+                /*ML.Result result = BL.Empleado.GetById(NumeroEmpleado.ToString());*/ //Verificar si va con value
                 if (result.Correct)
                 {
                     empleado = (ML.Empleado)result.Object;
-                    empleado.Empresa.Empresas = resultadoEmpresa.Objects;
+                    empleado.Empresa.Empresas = resultadoEmpresa.Objects.ToList();
                     empleado.Accion = "Update";
                 }//Unboxing
             }
             else //Add
             {
-                empleado.Empresa.Empresas = resultadoEmpresa.Objects;
+                empleado.Empresa.Empresas = resultadoEmpresa.Objects.ToList();
                 empleado.Accion = "Add";
             }
             return View(empleado);
@@ -60,6 +67,8 @@ namespace PL_MVC.Controllers
         [HttpPost]
         public ActionResult Form(ML.Empleado empleado)
         {
+
+            ServiceReferenceEmpleado.ServiceEmpleadoClient empleadoWCF = new ServiceReferenceEmpleado.ServiceEmpleadoClient();
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["Imagen"];
@@ -67,9 +76,12 @@ namespace PL_MVC.Controllers
                 {
                     empleado.Foto = ConvertirABase64(file);
                 }
+
                 if (empleado.Accion == "Add")//Add //Verificar si entra al if
                 {
-                    ML.Result result = BL.Empleado.Add(empleado);
+                    //WCF
+                    var result = empleadoWCF.Add(empleado);
+                    //ML.Result result = BL.Empleado.Add(empleado);
                     if (result.Correct)
                     {
                         ViewBag.Mensaje = "Se ha ingresado correctamente el empleado";
@@ -81,7 +93,9 @@ namespace PL_MVC.Controllers
                 }
                 else //Update
                 {
-                    ML.Result result = BL.Empleado.Update(empleado);
+                    //WCF 
+                    var result =empleadoWCF.Update(empleado);
+                    //ML.Result result = BL.Empleado.Update(empleado);
                     if (result.Correct)
                     {
                         ViewBag.Mensaje = "Se ha actualizado los datos del empleado correctamente";
@@ -95,14 +109,17 @@ namespace PL_MVC.Controllers
             }
             else
             {
-                ML.Result resultadoEmpresa = BL.Empresa.GetAll();
-                empleado.Empresa.Empresas = resultadoEmpresa.Objects;
+                var resultadoEmpresa = empleadoWCF.GetAll();
+                //ML.Result resultadoEmpresa = BL.Empresa.GetAll();
+                empleado.Empresa.Empresas = resultadoEmpresa.Objects.ToList();
                 return View(empleado);
             }
         }
         public ActionResult Delete(string NumeroEmpleado)
         {
-            ML.Result result = BL.Empleado.Delete(NumeroEmpleado);
+            ServiceReferenceEmpleado.ServiceEmpleadoClient empleadoWCF = new ServiceReferenceEmpleado.ServiceEmpleadoClient();
+            var result = empleadoWCF.Delete(NumeroEmpleado);
+            //ML.Result result = BL.Empleado.Delete(NumeroEmpleado);
             if (result.Correct)
             {
                 ViewBag.Mensaje = "Empleado borrado correctamente";

@@ -56,6 +56,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UsuarioGetAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ML" minOccurs="0" name="usuario" nillable="true" type="q7:Usuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UsuarioGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SLWFC" minOccurs="0" name="UsuarioGetAllResult" nillable="true" type="q8:Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetById">
     <xs:complexType>
       <xs:sequence>
@@ -66,7 +80,7 @@
   <xs:element name="GetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SLWFC" minOccurs="0" name="GetByIdResult" nillable="true" type="q7:Result" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SLWFC" minOccurs="0" name="GetByIdResult" nillable="true" type="q9:Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

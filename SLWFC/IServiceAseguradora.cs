@@ -21,6 +21,9 @@ namespace SLWFC
         [ServiceKnownType(typeof(ML.Aseguradora))]
         SLWFC.Result GetAll();
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Usuario))]
+        SLWFC.Result UsuarioGetAll(ML.Usuario usuario);
+        [OperationContract]
         [ServiceKnownType(typeof(ML.Aseguradora))]
         SLWFC.Result GetById(int IdAseguradora);
     }

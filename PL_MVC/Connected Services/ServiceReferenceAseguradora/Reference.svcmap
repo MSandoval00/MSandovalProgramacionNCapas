@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="94cf7ac1-03bb-4f71-8cab-474d0165df83" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="6f12b555-8697-4026-9d0a-fd0163d96eb6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,14 +22,14 @@
     <MetadataSource Address="http://localhost:50614/ServiceAseguradora.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceAseguradora.xsd" MetadataType="Schema" ID="ab94435b-7fcb-4d48-a7bd-7455ae22675d" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceAseguradora.wsdl" MetadataType="Wsdl" ID="6de615d0-5f44-4a7f-9f88-136625562e08" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?wsdl" />
-    <MetadataFile FileName="ServiceAseguradora.disco" MetadataType="Disco" ID="7d4c341a-8c3f-49ba-a074-3e1ea49db358" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?disco" />
-    <MetadataFile FileName="ServiceAseguradora1.xsd" MetadataType="Schema" ID="d9b0d4cf-62ca-4309-8b9b-d077b769c98c" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd4" />
-    <MetadataFile FileName="ServiceAseguradora2.xsd" MetadataType="Schema" ID="b9db6938-cdc6-4807-9faf-b6a4e4625179" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd3" />
-    <MetadataFile FileName="ServiceAseguradora3.xsd" MetadataType="Schema" ID="cb0e75a0-2e7b-4ac6-b7e1-52b990ce0329" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd1" />
-    <MetadataFile FileName="ServiceAseguradora4.xsd" MetadataType="Schema" ID="949b5ff8-6539-481e-b4b1-799fdb9fa16a" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServiceAseguradora5.xsd" MetadataType="Schema" ID="fafbc63f-21dd-4015-80ad-590c54c54013" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd5" />
+    <MetadataFile FileName="ServiceAseguradora.xsd" MetadataType="Schema" ID="802a1ed2-7d63-43d6-b4cd-d02afbcfaa77" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceAseguradora.wsdl" MetadataType="Wsdl" ID="f8fc8b5a-1494-46cf-8a79-7029c9de5ed7" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?wsdl" />
+    <MetadataFile FileName="ServiceAseguradora.disco" MetadataType="Disco" ID="6d0fa6ce-1795-4702-a439-88fd4a574f15" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?disco" />
+    <MetadataFile FileName="ServiceAseguradora1.xsd" MetadataType="Schema" ID="efa67ba1-728a-4e14-a45b-1a40faf2ecbc" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServiceAseguradora2.xsd" MetadataType="Schema" ID="3eaf27de-c73a-467f-8c79-65c9d774ca42" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceAseguradora3.xsd" MetadataType="Schema" ID="ed2f2500-8c5a-44ff-bd25-62db67a6e10b" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceAseguradora4.xsd" MetadataType="Schema" ID="582db693-1d08-4b85-97e9-ab5e18c81cdf" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceAseguradora5.xsd" MetadataType="Schema" ID="37a0427e-812e-4083-9e05-f94da80102d5" SourceId="1" SourceUrl="http://localhost:50614/ServiceAseguradora.svc?xsd=xsd5" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
