@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -169,6 +170,43 @@ namespace BL
                 result.Ex = ex;
             }
             return result;
+        }
+        public static ML.Result GetByIdWebApi(int IdAseguradora)
+        {
+            ML.Result result =new ML.Result();
+            try
+            {
+                string urlApi = System.Configuration.ConfigurationManager.AppSettings["URLapi"];//ConfigurationManager
+                using (var client =new HttpClient())
+                {
+                    client.BaseAddress=new Uri(urlApi);
+                    var responserTask = client.GetAsync("aseguradora/" + IdAseguradora);
+                    responserTask.Wait();
+                    var resultAPI=responserTask.Result;
+                    if (resultAPI.IsSuccessStatusCode)
+                    {
+                        var readTask=resultAPI.Content.ReadAsAsync<ML.Result>();
+                        readTask.Wait();
+                        ML.Aseguradora resultItemList=new ML.Aseguradora();
+                        resultItemList=Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Aseguradora>(readTask.Result.Object.ToString());
+                        result.Object = resultItemList;
+                        result.Correct=true;
+                    }
+                    else
+                    {
+                        result.Correct=false;
+                        result.ErrorMessage = "No existen registros en la tabla aseguradora";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+               result.Correct=false;
+                result.ErrorMessage=ex.Message;
+                result.Ex=ex;
+            }
+            return result;  
         }
     }
 }

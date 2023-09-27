@@ -103,6 +103,7 @@ namespace SLWebApi.Controllers
                 return Content(HttpStatusCode.BadRequest,result);
             }
         }
+
         [HttpGet]
         [Route("{IdAseguradora}")]
         public IHttpActionResult GetById(int IdAseguradora)
